@@ -7,6 +7,9 @@ bool found = false;
 int cnt;
 int searched;
 
+ifstream fin("sudoku.in");
+ofstream fout("sudoku.out");
+
 bool isValid() {
     for (int i = 0; i < n; i++) {
 
@@ -67,12 +70,11 @@ void search(int x, int y) {
     if (y == n) {
         if (isValid()) {
             if (!found) {
-                cout << endl;
                 for (int i = 0; i < n; i++) {
                     for (int j = 0; j < n; j++) {
-                        cout << board[i][j] << " ";
+                        fout << board[i][j] << " ";
                     }
-                    cout << endl;
+                    fout << endl;
                 }
             }
 
@@ -99,10 +101,8 @@ void search(int x, int y) {
 }
 
 int main() {
-    ifstream fin("sudoku.in");
-    ofstream fout("sudoku.out")
 
-    cin >> n;
+    fin >> n;
 
     board.resize(n);
 
@@ -114,7 +114,7 @@ int main() {
         board[i].resize(n);
         for (int j = 0; j < n; j++) {
             char c;
-            cin >> c;
+            fin >> c;
             if (c == '.') {
                 board[i][j] = 0;
             }
@@ -125,7 +125,7 @@ int main() {
     }
 
     search(0, 0);
-    cout << endl << cnt << " possibilities" << endl;
+    cout << cnt << " possibilities" << endl;
     cout << searched << " boards searched" << endl;
 
     return 0;
